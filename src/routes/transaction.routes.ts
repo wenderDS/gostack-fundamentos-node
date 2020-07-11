@@ -22,12 +22,6 @@ transactionRouter.post('/', (request, response) => {
   try {
     const { title, value, type } = request.body;
 
-    const balance = transactionsRepository.getBalance();
-
-    if (type === 'outcome' && balance.total < value) {
-      return response.status(400).json({ error: 'outcome > income!' });
-    }
-
     const createTransaction = new CreateTransactionService(
       transactionsRepository,
     );
